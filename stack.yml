@@ -1,0 +1,20 @@
+version: '3.4'
+services:
+  fastapi:
+    image: fastapi
+    ports:
+      - 8000:8000
+    healthcheck:
+      test: "curl --silent --output /dev/null http://localhost:8000; if [[ $$? == 0 ]]; then echo 0; else echo 1; fi"
+      interval: 100s
+      timeout: 10s
+      retries: 5
+    deploy:
+      replicas: 3
+      update_config:
+        parallelism: 1
+        delay: 200s
+      restart_policy:
+        condition: on-failure
+      # placement:
+      #   constraints: [node.hostname != ip-192-31-2-20]
