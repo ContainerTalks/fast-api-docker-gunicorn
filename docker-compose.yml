@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  fastapi:
+    image: fastapi
+    container_name: fast_api
+    ports:
+      - 8000:8000
